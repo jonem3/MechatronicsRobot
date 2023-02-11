@@ -1,8 +1,9 @@
 #include <Arduino.h>
+#include "arm/arm.h"
 
 void setup() {
   // put your setup code here, to run once:
-  int test = 0;
+  arm EricTheArm;
 }
 
 void loop() {
