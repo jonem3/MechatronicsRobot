@@ -1,3 +1,4 @@
+#include <Servo.h>
 class ServoMotor{
     private:
     int pin;
