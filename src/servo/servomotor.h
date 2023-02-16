@@ -6,12 +6,12 @@ private:
     double angle, maxAngle, minAngle;
     const float pi = 3.142;
     Servo motor;
-    double rateLimiting(double newAngle);
+    float rateLimiting(double newAngle);
 
 public:
     ServoMotor(int servoPin, int pulse, double max, double min);
     void moveTo(double setAngle);
-    double getAngle();
+    float getAngle();
 };
 
 /*
