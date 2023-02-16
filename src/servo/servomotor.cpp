@@ -33,3 +33,10 @@ double ServoMotor::getAngle()
 {
     return angle;
 }
+
+double ServoMotor::rateLimiting(double newAngle){
+    //Current angle is variable "angle"
+    //new angle as above
+    //return ratelimited angle
+
+}
