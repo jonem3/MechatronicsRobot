@@ -1,14 +1,16 @@
 #include <Servo.h>
-class ServoMotor{
-    private:
-        int pin, pulseWidth;
-        double angle, maxAngle, minAngle;
-        const float pi = 3.142;
-        Servo motor;
-    public:
-        ServoMotor(int servoPin, int pulse, double max, double min);
-        void moveTo(double setAngle);
-        double getAngle(); 
+class ServoMotor
+{
+private:
+    int pin, pulseWidth;
+    double angle, maxAngle, minAngle;
+    const float pi = 3.142;
+    Servo motor;
+
+public:
+    ServoMotor(int servoPin, int pulse, double max, double min);
+    void moveTo(double setAngle);
+    double getAngle();
 };
 
 /*
