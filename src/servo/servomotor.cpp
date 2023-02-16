@@ -29,12 +29,12 @@ void ServoMotor::moveTo(double setAngle)
     angle = setAngle;
 }
 
-double ServoMotor::getAngle()
+float ServoMotor::getAngle()
 {
     return angle;
 }
 
-double ServoMotor::rateLimiting(double newAngle){
+float ServoMotor::rateLimiting(double newAngle){
     //Current angle is variable "angle"
     //new angle as above
     //return ratelimited angle
