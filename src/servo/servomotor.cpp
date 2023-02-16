@@ -42,7 +42,7 @@ float ServoMotor::rateLimiting(double newAngle){
     if (newAngle > angle){
         positionCommand = min(newAngle , angle + increment) ;
     }
-    else if (targetAngle < angle){
+    else if (newAngle < angle){
         positionCommand = max(newAngle , angle - increment) ;
     }
     else {
