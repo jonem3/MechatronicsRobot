@@ -1,4 +1,5 @@
 #include "../servo/servomotor.h"
+#include <math.h>
 class arm
 {
 private:
