@@ -35,7 +35,7 @@ float ServoMotor::getAngle()
 }
 
 float ServoMotor::rateLimiting(double newAngle){
-    float newAngle ;
+    //float newAngle ;
     float angle ; 
     float increment = 0.017 ; 
     float positionCommand ;
