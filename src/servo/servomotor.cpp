@@ -28,7 +28,7 @@ void ServoMotor::moveTo(float setAngle)
     int cmdSignal = (setAngle + (pi / 2)) * (2000.0 / pi) + minPulseWidth;
     motor.writeMicroseconds(cmdSignal);
     angle = setAngle;
-    delay(10);
+    
 }
 
 float ServoMotor::getAngle()
@@ -52,6 +52,7 @@ float ServoMotor::rateLimiting(double newAngle)
     {
         positionCommand = newAngle;
     }
+    delay(10);
     return positionCommand;
 
     // Current angle is variable "angle"

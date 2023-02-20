@@ -9,10 +9,10 @@ void setup()
   arm RobotArm;
   RobotArm.setArmPosition(0, 0);
   delay(1000);
-  for (int i = -50; i < 50; i++)
+  for (int i = -50; i <= 50; i++)
   {
     RobotArm.setArmPosition(-20, i);
-    delay(50);
+    //delay(1);
   }
   RobotArm.setArmPosition(0, 0);
 }
