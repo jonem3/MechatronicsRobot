@@ -3,14 +3,14 @@ class ServoMotor
 {
 private:
     int pin, pulseWidth;
-    double angle, maxAngle, minAngle;
+    float angle, maxAngle, minAngle;
     const float pi = 3.142;
     Servo motor;
     float rateLimiting(double newAngle);
 
 public:
-    ServoMotor(int servoPin, int pulse, double max, double min);
-    void moveTo(double setAngle);
+    ServoMotor(int servoPin, int pulse, float max, float min);
+    void moveTo(float setAngle);
     float getAngle();
 };
 

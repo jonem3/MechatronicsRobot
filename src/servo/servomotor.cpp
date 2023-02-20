@@ -2,7 +2,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-ServoMotor::ServoMotor(int servoPin, int pulse, double max, double min)
+ServoMotor::ServoMotor(int servoPin, int pulse, float max, float min)
 {
     pin = servoPin;
     angle = 0;
@@ -12,7 +12,7 @@ ServoMotor::ServoMotor(int servoPin, int pulse, double max, double min)
     minAngle = min;
 }
 
-void ServoMotor::moveTo(double setAngle)
+void ServoMotor::moveTo(float setAngle)
 {
     if (setAngle > maxAngle)
     {
@@ -35,8 +35,6 @@ float ServoMotor::getAngle()
 }
 
 float ServoMotor::rateLimiting(double newAngle){
-    //float newAngle ;
-    float angle ; 
     float increment = 0.017 ; 
     float positionCommand ;
     if (newAngle > angle){

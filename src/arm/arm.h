@@ -8,7 +8,7 @@ private:
     float L2 = 79;
     float L3 = 136; // NEEDS TO BE UPDATED WHEN PEN END EFFECTOR ADDED
 
-    double S1, S2, S3;
+    float S1, S2, S3;
 
     ServoMotor Base = ServoMotor(4, 1488, 1.571, -1.571);
     ServoMotor Shoulder = ServoMotor(3, 1488, 1.571, -1.571);
