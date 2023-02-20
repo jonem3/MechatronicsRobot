@@ -14,6 +14,7 @@ ServoMotor::ServoMotor(int servoPin, int pulse, float max, float min)
 
 void ServoMotor::moveTo(float setAngle)
 {
+    //setAngle = rateLimiting(setAngle);
     if (setAngle > maxAngle)
     {
         setAngle = maxAngle;
@@ -23,10 +24,11 @@ void ServoMotor::moveTo(float setAngle)
         setAngle = minAngle;
     }
 
-    int minPulseWidth = pulseWidth - 1000;
-    int cmdSignal = (setAngle + (pi / 2)) * (2000 / pi) + minPulseWidth;
+    float minPulseWidth = float(pulseWidth) - 1000.0;
+    int cmdSignal = (setAngle + (pi / 2)) * (2000.0 / pi) + minPulseWidth;
     motor.writeMicroseconds(cmdSignal);
     angle = setAngle;
+    delay(10);
 }
 
 float ServoMotor::getAngle()
