@@ -34,11 +34,13 @@ float ServoMotor::getAngle()
     return angle;
 }
 
-float ServoMotor::rateLimiting(double newAngle){
-    float increment = 0.017 ; 
-    float positionCommand ;
-    if (newAngle > angle){
-        positionCommand = min(newAngle , angle + increment) ;
+float ServoMotor::rateLimiting(double newAngle)
+{
+    float increment = 0.017;
+    float positionCommand;
+    if (newAngle > angle)
+    {
+        positionCommand = min(newAngle, angle + increment);
     }
     else if (newAngle < angle)
     {
