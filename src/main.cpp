@@ -4,17 +4,22 @@
 //NOTE: Coordinate system is upside down on Y Axis
 void setup()
 {
+  Serial.begin(9600);
   // put your setup code here, to run once:
 
   arm RobotArm;
-  RobotArm.setArmPosition(0, 0);
+  RobotArm.setArmPosition(0,0);
   delay(1000);
-  for (int i = -50; i <= 50; i++)
+  int i = -50;
+  do
   {
-    RobotArm.setArmPosition(-20, i);
+    RobotArm.setArmPosition(-35, i);
     //delay(1);
-  }
-  RobotArm.setArmPosition(0, 0);
+    i = i+5;
+    Serial.println(i);
+  }while(i < 50);
+  Serial.println("RETURNING TO ORIGIN");
+  RobotArm.setArmPosition(-1,0);
 }
 
 void loop()

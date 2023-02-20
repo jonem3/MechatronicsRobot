@@ -4,8 +4,16 @@ void arm::setArmPosition(int x, int y)
     
     x = x + L2 + L3;
     getAngles(x, y);
+    Serial.print("S2: ");
+    Serial.print(S2);
+    Serial.print(" S3: ");
+    Serial.print(S3);
     while (Shoulder.getAngle() != S2 && Wrist.getAngle() != S3)
     {
+        Serial.print(" CURRENT S2: ");
+        Serial.print(S2);
+        Serial.print(" CURRENT S3: ");
+        Serial.println(S3);
         Wrist.moveTo(S3);
         Shoulder.moveTo(-S2);
     }
