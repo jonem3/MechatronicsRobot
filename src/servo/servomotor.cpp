@@ -14,7 +14,7 @@ ServoMotor::ServoMotor(int servoPin, int pulse, float max, float min)
 
 void ServoMotor::moveTo(float setAngle)
 {
-    //setAngle = rateLimiting(setAngle);
+    setAngle = rateLimiting(setAngle);
     if (setAngle > maxAngle)
     {
         setAngle = maxAngle;
