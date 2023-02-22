@@ -25,7 +25,7 @@ void ServoMotor::moveTo(float setAngle)
     }
 
     float minPulseWidth = float(pulseWidth) - 1000.0;
-    int cmdSignal = (setAngle + (pi / 2)) * (2000.0 / pi) + minPulseWidth;
+    int cmdSignal = (setAngle + (PI / 2)) * (2000.0 / PI) + minPulseWidth;
     motor.writeMicroseconds(cmdSignal);
     angle = setAngle;
 }
