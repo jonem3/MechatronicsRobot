@@ -7,7 +7,7 @@ class arm
         float L0 = 11;
         float L1 = 102;
         float L2 = 79;
-        float L3 = 136; // NEEDS TO BE UPDATED WHEN PEN END EFFECTOR ADDED
+        float L3 = 218; // NEEDS TO BE UPDATED WHEN PEN END EFFECTOR ADDED
         float S1, S2, S3;
 
         ServoMotor Base = ServoMotor(10, 1515, 1.571, -1.571);
