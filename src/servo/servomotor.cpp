@@ -2,11 +2,17 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-ServoMotor::ServoMotor(int servoPin, int pulse, float max, float min)
+ServoMotor::ServoMotor(int servoPin, int pulse, float max, float min, int initialPos)
 {
     pin = servoPin;
     angle = 0;
     pulseWidth = pulse;
+
+    float minPulseWidth = float(pulseWidth) - 1000.0;
+    int cmdSignal = (initialPos + (PI / 2)) * (2000.0 / PI) + minPulseWidth;
+    motor.writeMicroseconds(cmdSignal);
+    angle = initialPos;
+
     motor.attach(pin);
     maxAngle = max;
     minAngle = min;

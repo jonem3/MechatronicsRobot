@@ -8,7 +8,7 @@ private:
     float rateLimiting(double newAngle);
 
 public:
-    ServoMotor(int servoPin, int pulse, float max, float min);
+    ServoMotor(int servoPin, int pulse, float max, float min, int initialPos);
     void moveTo(float setAngle);
     float getAngle();
 };

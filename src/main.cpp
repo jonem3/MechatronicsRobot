@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include "arm/arm.h"
 
+#define TOP -90
+#define BOTTOM 36
+
 // NOTE: Coordinate system is upside down on Y Axis
 void moveArm();
 void setup()
@@ -12,14 +15,24 @@ void setup()
 void moveArm()
 {
   arm RobotArm;
-  RobotArm.setArmPosition(-30, -50);
   delay(1000);
-  int i = -50;
+  RobotArm.setArmPosition(-45, TOP);
+  delay(1000);
+  int i = TOP;
   do{
-    RobotArm.setArmPosition(-30, i);
-    i = i+5;
-  }while(i <= 50);
+    RobotArm.setArmPosition(-37, i);
+    i++;
+  }while(i <= BOTTOM);
+
+  RobotArm.setArmPosition(-50, BOTTOM);
+
+do{
+  RobotArm.setArmPosition(-50, i);
+  i = i - 10;
+}while(i >= TOP);
+RobotArm.goHome();
 }
+
 
 void loop()
 {

@@ -1,0 +1,13 @@
+Changes Made:
+Changed the wrist motor from an SG90 to an MG996R for added torque
+Reinforced the upper arm bar by doubling it up with another bar
+Removed the base motor for stability
+Removed upper arm bar and replaced with pen end effector and pen
+redesigned base
+
+Initial Conditions
+Specified starting point of servo motors to be pointing upwards
+Starting with pen tip 8cm away
+
+Interaction:
+the arm touches the end fo the pen to the board...
