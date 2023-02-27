@@ -3,7 +3,6 @@ void arm::setArmPosition(int x, int y)
 {
     x = x + L2 + L3;
     getAngles(x, y);
-    int count = 0;
     bool isPossible = checkAngles(x, y);
     if(isPossible){
         Serial.print("X: ");
