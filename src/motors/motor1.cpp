@@ -3,24 +3,47 @@
 
 motor::motor(int speed, bool ai1, bool ai2, bool standby)
 {
-   standBy = standby;
-   AI1 = ai1;
-   AI2 = ai2;
-   pwmValue = speed;
-}
-
-void motor::pinmode()
-{  
    pinMode(pinAI1, OUTPUT);
    pinMode(pinAI2, OUTPUT);
    pinMode(pinPWM, OUTPUT);
    pinMode(pinStandBy, OUTPUT);
-}
 
-void motor::execute()
-{
+   standBy = standby;
+   AI1 = ai1;
+   AI2 = ai2;
+   pwmValue = speed;
+
    digitalWrite(pinStandBy, standBy);
    digitalWrite(pinAI1, AI1);
    digitalWrite(pinAI2, AI2);
+   analogWrite(pinPWM, pwmValue);
+}
+
+void motor::stop()
+{
+   pwmValue = 0;
+   analogWrite(pinPWM, pwmValue);
+}
+
+void motor::reverse()
+{
+   if (AI1 == true && AI2 == false)
+   {
+      AI1 = true;
+      AI2 = false;
+   }
+   else
+   {
+      AI1 = false;
+      AI2 = true;
+   }
+
+   digitalWrite(pinAI1, AI1);
+   digitalWrite(pinAI2, AI2);
+}
+
+void motor::adjustspeed(int pwm)
+{
+   pwmValue = pwm;
    analogWrite(pinPWM, pwmValue);
 }
