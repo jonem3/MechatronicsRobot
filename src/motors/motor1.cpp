@@ -1,22 +1,18 @@
 #include "motor1.h"
 #include <Arduino.h>
 
-motor::motor(int speed, bool ai1, bool ai2, bool standby)
+motor::motor(int pinai1, int pinai2, int pinpwm, int pinstandby)
 {
+   pinAI1 = pinai1;
+   pinAI2 = pinai2;
+   pinPWM = pinpwm;
+   pinStandBy = pinstandby;
+   
    pinMode(pinAI1, OUTPUT);
    pinMode(pinAI2, OUTPUT);
    pinMode(pinPWM, OUTPUT);
    pinMode(pinStandBy, OUTPUT);
 
-   standBy = standby;
-   AI1 = ai1;
-   AI2 = ai2;
-   pwmValue = speed;
-
-   digitalWrite(pinStandBy, standBy);
-   digitalWrite(pinAI1, AI1);
-   digitalWrite(pinAI2, AI2);
-   analogWrite(pinPWM, pwmValue);
 }
 
 void motor::stop()
@@ -25,25 +21,14 @@ void motor::stop()
    analogWrite(pinPWM, pwmValue);
 }
 
-void motor::reverse()
+void motor::adjustspeedanddirection(int pwm, bool a, bool b)
 {
-   if (AI1 == true && AI2 == false)
-   {
-      AI1 = true;
-      AI2 = false;
-   }
-   else
-   {
-      AI1 = false;
-      AI2 = true;
-   }
+   AI1 = a;
+   AI2 = b;
+   pwmValue = pwm;
 
+   digitalWrite(pinStandBy, standBy);
    digitalWrite(pinAI1, AI1);
    digitalWrite(pinAI2, AI2);
-}
-
-void motor::adjustspeed(int pwm)
-{
-   pwmValue = pwm;
    analogWrite(pinPWM, pwmValue);
 }
