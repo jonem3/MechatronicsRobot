@@ -23,4 +23,5 @@ public:
     void moveMotor(int velocity);
     void motorStandBy();
     void brake();
+    void setup();
 };

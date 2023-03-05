@@ -7,7 +7,10 @@ motor::motor(int I1, int I2, int PWM, int StandBy, bool mirror)
    pinPWM = PWM;
    pinStandBy = StandBy;
    isMirrored = mirror;
+}
 
+void motor::setup()
+{
    pinMode(pinI1, OUTPUT);
    pinMode(pinI2, OUTPUT);
    pinMode(pinPWM, OUTPUT);
@@ -67,7 +70,8 @@ void motor::motorStandBy()
    digitalWrite(pinStandBy, standBy);
 }
 
-void motor::brake(){
+void motor::brake()
+{
    I1 = 1;
    I2 = 1;
    standBy = 1;

@@ -22,4 +22,5 @@ class encoder{
     
     float getWheelAngle();
     encoder(int A, int B, bool mirror);
+    void setup();
 };

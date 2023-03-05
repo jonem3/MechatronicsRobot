@@ -124,7 +124,11 @@ encoder::encoder(int A, int B, bool mirror){
     pinA = A;
     pinB = B;
     isMirrored = mirror;
+    
+    
+}
+
+void encoder::setup(){
     pinMode(pinA, INPUT);
     pinMode(pinB, INPUT);
-    
 }
