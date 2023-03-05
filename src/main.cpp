@@ -12,6 +12,7 @@ encoder enc = encoder(3, 2, 0);
 motor mot = motor(7, 8, 5, 9, 0);
 
 void encHandlerA(){
+  //ONE HANDLER REQUIRED FOR EACH CHANNEL FOR EACH MOTOR :( INTERRUPTS DONT WORK IN CLASSES
   enc.channelA();
 }
 
