@@ -7,12 +7,14 @@
 
 // NOTE: Coordinate system is upside down on Y Axis
 void moveArm();
-encoder *encoder1;
+encoder* enc;
 
 void setup()
 {
   Serial.begin(9600);
-  *encoder1 = new encoder(3, 2, 0);
+  enc = new encoder(3, 2, 0);
+  attachInterrupt(digitalPinToInterrupt(3), enc.channelA, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(2), enc.channelB, CHANGE);
 }
 
 
