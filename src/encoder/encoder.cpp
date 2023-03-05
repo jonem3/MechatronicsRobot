@@ -120,6 +120,18 @@ float encoder::getWheelAngle(){
     return wheel_angle;
 }
 
+void encoder::setup(){
+    pinMode(pinA, INPUT);
+    pinMode(pinB, INPUT);
+}
+int encoder::getPinA(){
+    return pinA;
+}
+
+int encoder::getPinB(){
+    return pinB;
+}
+
 encoder::encoder(int A, int B, bool mirror){
     pinA = A;
     pinB = B;
@@ -128,7 +140,3 @@ encoder::encoder(int A, int B, bool mirror){
     
 }
 
-void encoder::setup(){
-    pinMode(pinA, INPUT);
-    pinMode(pinB, INPUT);
-}

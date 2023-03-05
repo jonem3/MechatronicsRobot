@@ -15,12 +15,15 @@ class encoder{
     bool isMirrored;
 
     void calcData();
-    void channelA();
-    void channelB();
+    
 
     public:
-    
+    void channelA();
+    void channelB();
     float getWheelAngle();
-    encoder(int A, int B, bool mirror);
     void setup();
+    encoder(int A, int B, bool mirror);
+    int getPinA();
+    int getPinB();
+    
 };
