@@ -1,15 +1,18 @@
 #include <Arduino.h>
 #include "arm/arm.h"
+#include "encoder/encoder.h"
 
 #define TOP -90
 #define BOTTOM 36
 
 // NOTE: Coordinate system is upside down on Y Axis
 void moveArm();
+encoder *encoder1;
 
 void setup()
 {
   Serial.begin(9600);
+  *encoder1 = new encoder(3, 2, 0);
 }
 
 
