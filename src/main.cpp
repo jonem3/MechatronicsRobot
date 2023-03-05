@@ -11,6 +11,8 @@ void moveArm();
 encoder enc = encoder(3, 2, 0);
 motor mot = motor(7, 8, 5, 9, 0);
 
+int target = 360;
+
 void encHandlerA(){
   //ONE HANDLER REQUIRED FOR EACH CHANNEL FOR EACH MOTOR :( INTERRUPTS DONT WORK IN CLASSES
   enc.channelA();
@@ -33,14 +35,9 @@ void setup()
 void loop()
 {
   // put your main code here, to run repeatedly:
-  float error = 180-enc.getWheelAngle();
-  if(error < 0.1 && error > -0.1){
-    mot.motorStandBy();
-  }
-  else{
+  float error = target-enc.getWheelAngle();
 float velo = 5*error;
   mot.moveMotor(velo);
-  }
   
 }
 
