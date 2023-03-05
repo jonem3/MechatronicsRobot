@@ -1,7 +1,7 @@
-#include "motor1.h"
+#include "motor.h"
 #include <Arduino.h>
 
-motor::motor(int speed, bool ai1, bool ai2, bool standby)
+motor::motor(int ai1Pin, int ai2Pin, int pwmPin, int stdbyPin)
 {
    pinMode(pinAI1, OUTPUT);
    pinMode(pinAI2, OUTPUT);

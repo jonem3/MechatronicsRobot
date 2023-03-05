@@ -12,7 +12,7 @@ class motor
         unsigned char pwmValue = 100; // PWM value to be written to the output
 
     public:
-        motor(int speed, bool ai1, bool ai2, bool standby);
+        motor(int ai1Pin, int ai2Pin, int pwmPin, int stdbyPin);
         void stop();
         void reverse();
         void adjustspeed(int pwm);
