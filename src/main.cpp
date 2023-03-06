@@ -1,64 +1,45 @@
 #include <Arduino.h>
 #include "arm/arm.h"
-#include "encoder/encoder.h"
-#include "motor/motor.h"
+#include "motion/motion.h"
 
-#define TOP -90
-#define BOTTOM 36
-
-// NOTE: Coordinate system is upside down on Y Axis
-void moveArm();
-encoder enc = encoder(3, 2, 0);
-motor mot = motor(7, 8, 5, 9, 0);
-
-int target = 360;
-
-void encHandlerA(){
-  //ONE HANDLER REQUIRED FOR EACH CHANNEL FOR EACH MOTOR :( INTERRUPTS DONT WORK IN CLASSES
-  enc.channelA();
-}
-
-void encHandlerB(){
-  enc.channelB();
-}
+motion robotMotion;
 
 void setup()
 {
+  PCICR |= 0b00000010;
+  PCMSK2 |= 0b11110000;  
+  robotMotion.setup();
+  // Encoders in Digital Pins 10, 11, 12 & 13
+  // Encoder A Wire - Green, Encoder B Wire - Blue
+  // 10 - B, 11 - A, 12 - B, 13 - A
   Serial.begin(9600);
-  enc.setup();
-  mot.setup();
-  attachInterrupt(digitalPinToInterrupt(enc.getPinA()), encHandlerA, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(enc.getPinB()), encHandlerB, CHANGE);
+  robotMotion.moveToAngle(90, 90);
 }
 
 
 void loop()
 {
   // put your main code here, to run repeatedly:
-  float error = target-enc.getWheelAngle();
-float velo = 5*error;
-  mot.moveMotor(velo);
+
   
 }
 
-void moveArm()
-{
-  // Function for Task 1 of the Mechatronics Project
-  arm RobotArm;
-  delay(1000);
-  RobotArm.setArmPosition(-45, TOP);
-  delay(1000);
-  int i = TOP;
-  do{
-    RobotArm.setArmPosition(-37, i);
-    i++;
-  }while(i <= BOTTOM);
 
-  RobotArm.setArmPosition(-50, BOTTOM);
+ISR(PCINT2_vect){
+  static const int8_t lookup_table[] = {0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 0};
+  static const int8_t inv_lookup_table[] = {0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 0, -1, 0, -1, 1, 0};
 
-do{
-  RobotArm.setArmPosition(-50, i);
-  i = i - 10;
-}while(i >= TOP);
-RobotArm.goHome();
+  static uint8_t enc1_val = 0;
+  static uint8_t enc2_val = 0;
+
+  int counts[2];
+
+  enc1_val = enc1_val << 2;
+  enc1_val = enc1_val | ((PINB & 0b00110000) >> 4);
+  counts[0] = lookup_table[enc1_val & 0b00001111];
+
+  enc2_val = enc2_val << 2;
+  enc1_val = enc1_val | ((PINB & 0b11000000) >> 6);
+  counts[1] = inv_lookup_table[enc2_val & 0b00001111];
+  robotMotion.setEncoders(counts);
 }
