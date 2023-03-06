@@ -6,9 +6,9 @@ private:
     motor rightMot = motor(2, 3, 4, 9, 1);
     encoder leftEnc;
     encoder rightEnc;
-    const float Kp = 5;
+    const float Kp = 2;
     public:
     void setup();
-    void setEncoders(int counts[2]);
+    void setEncoders(int countL, int countR);
     void moveToAngle(int leftMotAng, int rightMotAng);
 };
