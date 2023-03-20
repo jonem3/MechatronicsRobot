@@ -34,9 +34,9 @@ void motor::moveMotor(int velocity)
 int motor::velocityLimiter(int velocity)
 {
 
-   if (abs(velocity) > 255)
+   if (abs(velocity) > 100)
    {
-      return 255;
+      return 100;
    }
    else
    {
