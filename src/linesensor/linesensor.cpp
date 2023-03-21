@@ -1,36 +1,29 @@
 #include "linesensor.h"
 
-linesensor::linesensor(int LSP, int CSP, int RSP)
-{
-    leftSensorPin = LSP;
-    centreSensorPin = CSP;
-    rightSensorPin = RSP;
+void linesensor::getSensors(){
+    for (int i = 0; i<6;i++){
+        readings[i] = Sensors[i].getReading();
+    }
 }
 
-void linesensor::setup()
-{
-    pinMode(leftSensorPin, INPUT);
-    pinMode(centreSensorPin, INPUT);
-    pinMode(rightSensorPin, INPUT);
-}
+int linesensor::getAngle(){
+    getSensors();
+    int greatestVal;
+    int indexVal = -1;
+    for (int i = 0; i<6; i++){
+        if(readings[i] > 5 && readings[i] > greatestVal){
+            greatestVal = readings[i];
+            indexVal = i;
+        }
+    }
+    if (indexVal != -1){
+        return angle[indexVal];
+    }
+    else if(lastAngle == -5 || lastAngle == 5){
+        return 0;
+    }
+    else{
+        return lastAngle;
+    }
 
-float linesensor::getLeftSReading()
-{
-    float Reading;
-    Reading = analogRead(leftSensorPin);
-    return Reading;
-}
-
-float linesensor::getCentreSReading()
-{
-    float Reading;
-    Reading = analogRead(centreSensorPin);
-    return Reading;
-}
-
-float linesensor::getRightSReading()
-{
-    float Reading;
-    Reading = analogRead(rightSensorPin);
-    return Reading;
 }
