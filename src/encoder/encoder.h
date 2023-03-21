@@ -6,8 +6,20 @@ private:
     volatile float enc_rev;
     volatile float enc_angle;
     volatile float wheel_angle;
+    int lastTime ; 
+    int currentTime ; 
+    int elapsedTime ;
+    const float radius = 1;
+    const float circumference = 6.2;
+    const float radius;
+    const float circumference;
+    int lastTime;
+    float lastAngle;
+    float dist_covered; 
+    float speed_robot; 
 public:
     void setEncoders(int count);
+    float getSpeed();
     float readAngle();
     float readSpeed();
 };
