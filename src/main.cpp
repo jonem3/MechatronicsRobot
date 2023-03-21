@@ -1,8 +1,11 @@
 #include <Arduino.h>
 #include "arm/arm.h"
 #include "motion/motion.h"
+#include "linesensor/linesensor.h"
+#define Kp 5
 
 motion robotMotion;
+linesensor theSuperGlueMethod;
 
 void setup()
 {
@@ -13,15 +16,18 @@ void setup()
   // Encoder A Wire - Green, Encoder B Wire - Blue
   // 10 - B, 11 - A, 12 - B, 13 - A
   Serial.begin(9600);
-  robotMotion.moveToAngle(360, 360);
+
 }
 
 
 void loop()
 {
   // put your main code here, to run repeatedly:
-
-  
+  int speed = 50;
+  int error = theSuperGlueMethod.getAngle();  
+  int left = speed + (error * Kp);
+  int right = speed - (error *Kp);
+  robotMotion.setMotorSpeed(left, right);
 }
 
 

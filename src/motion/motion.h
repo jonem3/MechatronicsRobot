@@ -11,4 +11,5 @@ private:
     void setup();
     void setEncoders(int countL, int countR);
     void moveToAngle(int leftMotAng, int rightMotAng);
+    void setMotorSpeed(int left, int right);
 };

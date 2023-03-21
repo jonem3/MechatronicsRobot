@@ -26,3 +26,8 @@ void motion::moveToAngle(int leftMotAngle, int rightMotAngle){
         rightMot.moveMotor(errorR*Kp);
     }while(leftAngle != leftMotAngle && rightAngle != rightMotAngle);
 }
+
+void motion::setMotorSpeed(int left, int right){
+    leftMot.moveMotor(left);
+    rightMot.moveMotor(right);
+}

@@ -8,7 +8,7 @@ void linesensor::getSensors(){
 
 int linesensor::getAngle(){
     getSensors();
-    int greatestVal;
+    int greatestVal = 0;
     int indexVal = -1;
     for (int i = 0; i<6; i++){
         if(readings[i] > 5 && readings[i] > greatestVal){
