@@ -18,12 +18,12 @@ float encoder::readSpeed(){
 
 float encoder::getSpeed()
 {
-    int currentTime = millis();
-    int lastTime = 0;
+    currentTime = millis();
+    lastTime = 0;
     float angleDifference = readAngle() - lastAngle;
     dist_covered = circumference * (angleDifference / 360);
-    float elapsedTime_Sec = (currentTime - lastTime) / 60;
-    speed_robot = dist_covered / elapsedTime_Sec;
+    elapsedTime = (currentTime - lastTime) / 60;
+    speed_robot = dist_covered / elapsedTime;
     lastTime = currentTime;
     lastAngle = readAngle();
     return speed_robot;
