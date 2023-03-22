@@ -4,7 +4,7 @@
 void encoder::setEncoders(int count){
     enc_count += count;
     enc_rev = enc_count/ENC_K;
-    enc_angle = enc_rev*360;
+    enc_angle = (enc_rev*360);
     wheel_angle = enc_angle*GEAR_RATIO;
 }
 
@@ -16,15 +16,26 @@ float encoder::readSpeed(){
     return 0;
 }
 
-float encoder::getSpeed()
+double encoder::getSpeed()
 {
+
     currentTime = millis();
-    lastTime = 0;
-    float angleDifference = readAngle() - lastAngle;
+    float currentAngle = wheel_angle;
+    float angleDifference = currentAngle - lastAngle;
+    int timeDifference = currentTime - lastTime;
+
+    
     dist_covered = circumference * (angleDifference / 360);
-    elapsedTime = (currentTime - lastTime) / 60;
-    speed_robot = dist_covered / elapsedTime;
+    speed_robot = (dist_covered / timeDifference);
+
+    if(isnan(speed_robot)){
+        speed_robot = 0;
+    }
+
+    Serial.print(" Motor Speed: ");
+    Serial.print(speed_robot);
+
     lastTime = currentTime;
-    lastAngle = readAngle();
+    lastAngle = currentAngle;
     return speed_robot;
 }

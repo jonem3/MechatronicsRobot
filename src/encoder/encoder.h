@@ -1,3 +1,4 @@
+#include <Arduino.h>
 class encoder
 {
 private:
@@ -7,18 +8,17 @@ private:
     volatile float enc_rev;
     volatile float enc_angle;
     volatile float wheel_angle;
-    int lastTime;
+    int lastTime = 0;
     int currentTime;
     int elapsedTime;
-    const float radius = 1;
-    const float circumference = 6.2;
-    float lastAngle;
+    const float circumference = 68*PI;
+    float lastAngle = 0;
     float dist_covered;
-    float speed_robot;
+    double speed_robot;
 
 public:
     void setEncoders(int count);
-    float getSpeed();
+    double getSpeed();
     float readAngle();
     float readSpeed();
 };

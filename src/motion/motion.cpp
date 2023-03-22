@@ -16,18 +16,49 @@ void motion::moveToAngle(int leftMotAngle, int rightMotAngle){
     do{
         leftAngle = leftEnc.readAngle();
         rightAngle = rightEnc.readAngle();
-        Serial.print("L ANGLE: ");
-        Serial.print(leftAngle);
-        Serial.print("\tR ANGLE: ");
-        Serial.println(rightAngle);
         float errorL = leftMotAngle - leftAngle;
         float errorR = rightMotAngle - rightAngle;
-        leftMot.moveMotor(errorL*Kp);
-        rightMot.moveMotor(errorR*Kp);
+        leftMot.moveMotor(errorL*AngleKp);
+        rightMot.moveMotor(errorR*AngleKp);
     }while(leftAngle != leftMotAngle && rightAngle != rightMotAngle);
 }
 
-void motion::setMotorSpeed(int left, int right){
-    leftMot.moveMotor(left);
-    rightMot.moveMotor(right);
+float motion::speedController(float currentSpeed, float targetSpeed, int motor){
+    float error = targetSpeed - currentSpeed;
+    float input = error*Kp + cumError[motor]*Ki;
+    cumError[motor]+=error;
+    if(cumError[motor] > (100/Ki)){
+        cumError[motor] = (100/Ki);
+    }
+    else if(cumError[motor] < -(100/Ki)){
+        cumError[motor] = -(100/Ki);
+    }
+
+    return input;
+}
+
+void motion::setMotorSpeed(float left, float right){
+    double leftSpeed = leftEnc.getSpeed();
+    double rightSpeed = rightEnc.getSpeed();
+    Serial.println();
+    float leftInput = speedController(leftSpeed, left, 0);
+    float rightInput = speedController(rightSpeed, right, 1);
+    
+    leftMot.moveMotor(leftInput);
+    rightMot.moveMotor(rightInput);
+}
+
+void motion::rotateAngle(float degrees){
+    Serial.println(degrees);
+    float rotationPercentage = degrees/360; // How many rotations of the robot
+    Serial.println(rotationPercentage);
+    float toTravel = robotCir*rotationPercentage; // How far a wheel needs to travel to acheive this
+    Serial.println(toTravel);
+    float numRotations = toTravel/wheelCircumference; // Number of rotations of a wheel needed
+    Serial.println(numRotations);
+    float rotationDegrees = numRotations*360; // Conversion to degrees
+    Serial.println(rotationDegrees);
+    float leftAngle = leftEnc.readAngle();
+    float rightAngle = rightEnc.readAngle();
+    moveToAngle(leftAngle+rotationDegrees, rightAngle-rotationDegrees);
 }

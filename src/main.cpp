@@ -2,10 +2,13 @@
 #include "arm/arm.h"
 #include "motion/motion.h"
 #include "linesensor/linesensor.h"
-#define Kp 5
+#define Kp 0.003
 
 motion robotMotion;
-linesensor theSuperGlueMethod;
+linesensor lineDetection;
+
+float currentSetting = 0;
+
 
 void setup()
 {
@@ -16,18 +19,27 @@ void setup()
   // Encoder A Wire - Green, Encoder B Wire - Blue
   // 10 - B, 11 - A, 12 - B, 13 - A
   Serial.begin(9600);
+  robotMotion.rotateAngle(90);
 
+}
+
+void followLine(){
+  float speed = 0.2;
+  float error = lineDetection.getAngle();  
+  //float error = 0;
+  float left = speed + (error * Kp);
+  float right = speed - (error *Kp);
+
+  robotMotion.setMotorSpeed(left, right);
 }
 
 
 void loop()
 {
   // put your main code here, to run repeatedly:
-  int speed = 50;
-  int error = theSuperGlueMethod.getAngle();  
-  int left = speed + (error * Kp);
-  int right = speed - (error *Kp);
-  robotMotion.setMotorSpeed(left, right);
+ 
+
+  
 }
 
 
