@@ -24,4 +24,5 @@ public:
     void moveToAngle(int leftMotAng, int rightMotAng);
     void setMotorSpeed(float left, float right);
     void rotateAngle(float degrees);
+    float getDistanceTravelled();
 };

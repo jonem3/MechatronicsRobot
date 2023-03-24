@@ -33,4 +33,5 @@ private:
 public:
     
     int getAngle();
+    bool lineDetected();
 };

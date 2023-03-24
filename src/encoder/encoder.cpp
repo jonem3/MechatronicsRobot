@@ -32,9 +32,6 @@ double encoder::getSpeed()
         speed_robot = 0;
     }
 
-    Serial.print(" Motor Speed: ");
-    Serial.print(speed_robot);
-
     lastTime = currentTime;
     lastAngle = currentAngle;
     return speed_robot;

@@ -27,3 +27,15 @@ int linesensor::getAngle(){
     }
 
 }
+
+bool linesensor::lineDetected(){
+    int count = 0;
+    getSensors();
+    for(int i = 0; i<6; i++){
+        if(readings[i] > 5){
+            count++;
+        }
+    }
+        return count > 3;
+
+}
