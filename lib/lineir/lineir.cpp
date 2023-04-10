@@ -1,4 +1,4 @@
-#include "lineir.h"
+#include <lineir.h>
 
 lineir::lineir(int pin, int min, int max){
     irPIN = pin;

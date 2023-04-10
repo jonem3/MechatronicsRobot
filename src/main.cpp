@@ -1,7 +1,7 @@
 #include <Arduino.h>
-#include "arm/arm.h"
-#include "motion/motion.h"
-#include "linesensor/linesensor.h"
+#include <arm.h>
+#include <motion.h>
+#include <linesensor.h>
 #define Kp 0.003
 
 motion robotMotion;

@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "../lineir/lineir.h"
+#include <lineir.h>
 
 /*
 L SENSOR:

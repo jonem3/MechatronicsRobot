@@ -1,4 +1,4 @@
-#include "linesensor.h"
+#include <linesensor.h>
 
 void linesensor::getSensors(){
     for (int i = 0; i<6;i++){

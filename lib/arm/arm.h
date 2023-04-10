@@ -1,4 +1,4 @@
-#include "../servo/servomotor.h"
+#include <servomotor.h>
 #include <math.h>
 #include <Arduino.h>
 class arm

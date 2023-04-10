@@ -1,5 +1,5 @@
-#include "../motor/motor.h"
-#include "../encoder/encoder.h"
+#include <motor.h>
+#include <encoder.h>
 class motion
 {
 private:
