@@ -6,14 +6,14 @@ class Distanceir
     private :
     
     int distance ; 
-    float irDistance ; 
-    int analogPin ; 
+    int irDistance ; 
+    int Analogpin ; 
 
     public :
 
     Distanceir(int pin) ;
 
-    int FindDistance (float irDistance) ;
+    int FindDistance () ;
 
 
 };
