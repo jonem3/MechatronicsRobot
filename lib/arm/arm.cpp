@@ -1,4 +1,4 @@
-#include "arm.h"
+#include <arm.h>
 void arm::setArmPosition(int x, int y)
 {
     x = x + L2 + L3;
@@ -10,10 +10,10 @@ void arm::setArmPosition(int x, int y)
         Serial.print(" | Y: ");
         Serial.println(y);
         Serial.println();
-        while (Shoulder.getAngle() != S2 && Wrist.getAngle() != S3)
+        while (Shoulder.getAngle() != S2 && Elbow.getAngle() != S3)
     {
         
-        Wrist.moveTo(S3);
+        Elbow.moveTo(S3);
         Shoulder.moveTo(-S2);
     }
     }
@@ -21,10 +21,15 @@ void arm::setArmPosition(int x, int y)
     
 }
 
+void arm::setup(){
+    Shoulder.setup();
+    Elbow.setup();
+}
+
 void arm::goHome(){
     S2 = 1.571; S3 = 0;
-    while(Shoulder.getAngle() != S2 && Wrist.getAngle() != S3){
-        Wrist.moveTo(S3);
+    while(Shoulder.getAngle() != S2 && Elbow.getAngle() != S3){
+        Elbow.moveTo(S3);
         Shoulder.moveTo(S2);
     }
 }
@@ -56,4 +61,32 @@ void arm::getAngles(int x, int y)
     float den = 2 * L2 * L3;
     S3 = acos(num/den); // Wrist Angle
     S2 = atan2(y, x) - atan2(L3*sin(S3), L2 + L3*cos(S3)); // Shoulder Angle
+}
+
+void arm::drawLine(){
+    const int top = -90;
+    const int bottom = 36;
+    delay(1000);
+    setArmPosition(-45, top);
+    delay(1000);
+    int i = top;
+    do{
+        setArmPosition(-37, i);
+        i++;
+    }while(i <= bottom);
+
+    do{
+        setArmPosition(-50, i);
+        i--;
+    }
+    while(i >= (top+bottom)/2);
+}
+
+
+void arm::drawHoriz(int angle){
+    // Angle should be relative to middle position i.e. from centre of horizontal line to robot rotate 90 degrees left should be -90
+    const int vert = -27;
+    int horiz = -37*cos(angle);
+    setArmPosition(horiz, vert);
+
 }

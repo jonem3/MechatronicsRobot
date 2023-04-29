@@ -7,15 +7,17 @@ ServoMotor::ServoMotor(int servoPin, int pulse, float max, float min, int initia
     pin = servoPin;
     angle = 0;
     pulseWidth = pulse;
-
-    float minPulseWidth = float(pulseWidth) - 1000.0;
-    int cmdSignal = (initialPos + (PI / 2)) * (2000.0 / PI) + minPulseWidth;
-    motor.writeMicroseconds(cmdSignal);
     angle = initialPos;
-
-    motor.attach(pin);
     maxAngle = max;
     minAngle = min;
+}
+
+void ServoMotor::setup()
+{
+    float minPulseWidth = float(pulseWidth) - 1000.0;
+    int cmdSignal = (angle + (PI / 2)) * (2000.0 / PI) + minPulseWidth;
+    motor.writeMicroseconds(cmdSignal);
+    motor.attach(pin);
 }
 
 void ServoMotor::moveTo(float setAngle)

@@ -1,11 +1,12 @@
 #include <Arduino.h>
-#include <arm.h>
 #include <motion.h>
 #include <linesensor.h>
+#include <arm.h>
 #define Kp 0.003 // Proportional Constant for line following
 
 motion robotMotion; // Instantiate a motion object
 linesensor lineDetection; // Instantiate a linesensor object
+arm roboticArm;
 
 float currentSetting = 0; // Initiate floating point value
 void task2();
@@ -15,12 +16,14 @@ void setup()
   PCICR |= 0b00000001; // Interrupt pin setup
   PCMSK0 |= 0b11110000; // Interrupt pin setup
   robotMotion.setup(); // Run setup method of motion object (Arduino does not allow running pinMode etc. outside of setup or loop unless called from within)
+  roboticArm.setup();
   // Encoders in Digital Pins 10, 11, 12 & 13
   // Encoder A Wire - Green, Encoder B Wire - Blue
   // 10 - B, 11 - A, 12 - B, 13 - A
   Serial.begin(9600);
   // robotMotion.rotateAngle(90);
-  task2();
+  // task2();
+  roboticArm.drawLine();
 }
 
 void followLine()

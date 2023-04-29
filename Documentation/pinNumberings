@@ -1,0 +1,26 @@
+Battery + 7.2v - Vin
+Battery 0v - Gnd
+
+Encoder Left Green - 10
+Encoder Left Blue - 11
+
+Encoder Right Green - 12
+Encoder Right Blue - 13
+
+Right IR - A8
+Left IR - A9
+
+Shoulder Motor - 44
+Elbow Motor - 45
+
+left motor:
+I1 - 7
+I2 - 8
+PWM - 5
+StandBy - 9
+
+right motor:
+I1 - 2
+I2 - 3
+PWM - 4
+StandBy - 9
