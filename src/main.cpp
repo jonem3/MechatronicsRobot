@@ -2,11 +2,14 @@
 #include <motion.h>
 #include <linesensor.h>
 #include <arm.h>
+#include <distanceIR.h>
 #define Kp 0.003 // Proportional Constant for line following
 
 motion robotMotion; // Instantiate a motion object
 linesensor lineDetection; // Instantiate a linesensor object
 arm roboticArm;
+Distanceir left = Distanceir(9);
+Distanceir right = Distanceir(8);
 
 float currentSetting = 0; // Initiate floating point value
 void task2();
@@ -23,7 +26,7 @@ void setup()
   Serial.begin(9600);
   // robotMotion.rotateAngle(90);
   // task2();
-  roboticArm.drawLine();
+  //roboticArm.drawLine();
 }
 
 void followLine()
@@ -41,6 +44,11 @@ void followLine()
 void loop()
 {
   // put your main code here, to run repeatedly: How about no
+  Serial.print(left.FindDistance());
+  Serial.print(" ");
+  Serial.println(right.FindDistance());
+  delay(100);
+  //Serial.println(right.FindDistance());
   robotMotion.setMotorSpeed(0, 0); // Robot goes nowhere
 }
 
