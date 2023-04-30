@@ -86,9 +86,9 @@ void task3b(){
 
   roboticArm.drawLine();
 
+
   
-  
-  // Spinny stuff goes here - Drawing horiz line
+  // Spinny stuff goes here - Drawing horiz line - Monday Meeting
 
   robotMotion.setMotorSpeed(0, 0); // Stop
   robotMotion.rotateAngle(-90); // Lets try spinning, that's a good trick
