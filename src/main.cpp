@@ -52,6 +52,61 @@ void loop()
   robotMotion.setMotorSpeed(0, 0); // Robot goes nowhere
 }
 
+void task3b(){
+  robotMotion.rotateAngle(-90); // Spin the robot by 90 degrees to the ccw
+  
+  do{
+    robotMotion.setMotorSpeed(0.2, 0.2); // Vroom vroom, is a PI loop so needs to keep being called
+  }while(!lineDetection.lineDetected()); // Keep zooming until the line is detected
+  delay(800); // Keep going a little futher
+
+  robotMotion.setMotorSpeed(0, 0); // Stop
+  robotMotion.rotateAngle(-90); // Spin again
+
+  float startDistance = robotMotion.getDistanceTravelled(); // reset distance start point.
+  float currentDistanceElapsed = 0; // reset travelled distance
+
+  do
+  {
+    followLine(); // Follow line controller (See above)
+    currentDistanceElapsed = robotMotion.getDistanceTravelled() - startDistance; // Find out how far along the line has been traversed
+  } while (currentDistanceElapsed < 800); // Should only go 80cm
+
+
+  int meanDistance;
+  int leftDistance;
+  int rightDistance;
+  do{
+    followLine();
+    leftDistance = left.FindDistance();
+    rightDistance = right.FindDistance();
+
+    meanDistance = (leftDistance + rightDistance)/2;
+  }while(meanDistance > 10); // We need to get an accurate value for this
+
+  roboticArm.drawLine();
+
+  
+  
+  // Spinny stuff goes here - Drawing horiz line
+
+  robotMotion.setMotorSpeed(0, 0); // Stop
+  robotMotion.rotateAngle(-90); // Lets try spinning, that's a good trick
+
+  do{
+    robotMotion.setMotorSpeed(0.2, 0.2);
+  }while(!lineDetection.lineDetected());
+  delay(800);
+
+  robotMotion.setMotorSpeed(0, 0);
+  robotMotion.rotateAngle(-90);
+
+  do{
+    followLine();
+  }while(!lineDetection.lineDetected());
+  robotMotion.setMotorSpeed(0, 0);
+}
+
 void task2()
 {
   robotMotion.rotateAngle(-90); // Spin the robot by 90 degrees to the ccw
