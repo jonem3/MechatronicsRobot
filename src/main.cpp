@@ -13,7 +13,7 @@ Distanceir right = Distanceir(8);
 
 float currentSetting = 0; // Initiate floating point value
 void task2();
-
+void task3b();
 void setup()
 {
   PCICR |= 0b00000001; // Interrupt pin setup
@@ -27,6 +27,7 @@ void setup()
   // robotMotion.rotateAngle(90);
   // task2();
   //roboticArm.drawLine();
+  task2();
 }
 
 void followLine()
@@ -53,6 +54,7 @@ void loop()
 }
 
 void task3b(){
+  roboticArm.goHome();
   robotMotion.rotateAngle(-90); // Spin the robot by 90 degrees to the ccw
   
   do{
@@ -85,6 +87,7 @@ void task3b(){
   }while(meanDistance > 10); // We need to get an accurate value for this
 
   roboticArm.drawLine();
+  roboticArm.goHome();
 
 
   

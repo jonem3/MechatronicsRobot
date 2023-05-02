@@ -3,8 +3,8 @@
 class motion
 {
 private:
-    motor leftMot = motor(7, 8, 5, 9, 1);
-    motor rightMot = motor(2, 3, 4, 9, 0);
+    motor leftMot = motor(16, 17, 5, 9, 1);
+    motor rightMot = motor(14, 15, 4, 9, 0);
     encoder leftEnc;
     encoder rightEnc;
     const float AngleKp = 5;

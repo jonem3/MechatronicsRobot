@@ -9,8 +9,8 @@ class arm
         float L2 = 79;
         float L3 = 139; //Updated
         float S2, S3;
-        ServoMotor Shoulder = ServoMotor(44, 1478, 1.571, -1.571, 1.571);
-        ServoMotor Elbow = ServoMotor(45, 1484, 1.571, -1.571, 0);
+        ServoMotor Shoulder = ServoMotor(7, 1478, 1.571, -1.571, 1.571);
+        ServoMotor Elbow = ServoMotor(8, 1484, 1.571, -1.571, 0);
 
         void getAngles(int x, int y);
         bool checkAngles(int oldX, int oldY);

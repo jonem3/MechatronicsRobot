@@ -27,26 +27,26 @@ Left IR - A9
 
 ## Arm:
 
-Shoulder Motor - 44
+Shoulder Motor - 7
 
-Elbow Motor - 45
+Elbow Motor - 8
 
 ## Motors:
 
 StandBy - 9
 
 ### Left motor:
-I1 - 7
+I1 - 16
 
-I2 - 8
+I2 - 17
 
 PWM - 5
 
 
 ### Right motor:
-I1 - 2
+I1 - 14
 
-I2 - 3
+I2 - 15
 
 PWM - 4
 
