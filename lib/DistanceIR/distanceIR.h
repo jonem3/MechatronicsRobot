@@ -5,7 +5,7 @@ class Distanceir
 {
     private :
     
-    int distance ; 
+    float distance ; 
     int irDistance ; 
     int Analogpin ; 
 
@@ -13,7 +13,7 @@ class Distanceir
 
     Distanceir(int pin) ;
 
-    int FindDistance () ;
+    float FindDistance () ;
 
 
 };

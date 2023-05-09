@@ -10,15 +10,22 @@ void arm::setArmPosition(int x, int y)
         Serial.print(" | Y: ");
         Serial.println(y);
         Serial.println();
-        while (Shoulder.getAngle() != S2 && Elbow.getAngle() != S3)
-    {
         
-        Elbow.moveTo(S3);
-        Shoulder.moveTo(-S2);
-    }
+        Elbow.setAngle(S3);
+        Shoulder.setAngle(-S2);
     }
     
     
+}
+
+void arm::attachArm(){
+    Shoulder.attach();
+    Elbow.attach();
+}
+
+void arm::detachArm(){
+    Shoulder.detach();
+    Elbow.detach();
 }
 
 void arm::setup(){
@@ -28,10 +35,14 @@ void arm::setup(){
 
 void arm::goHome(){
     S2 = 1.571; S3 = 0;
-    while(Shoulder.getAngle() != S2 && Elbow.getAngle() != S3){
-        Elbow.moveTo(S3);
-        Shoulder.moveTo(S2);
-    }
+    Elbow.setAngle(S3);
+    Shoulder.setAngle(S2);
+}
+
+void arm::drivingPosition(){
+    S2 = 0; S3 = 0;
+        Elbow.setAngle(S3);
+        Shoulder.setAngle(S2);
 }
 
 bool arm::checkAngles(int oldX, int oldY){
@@ -83,10 +94,10 @@ void arm::drawLine(){
 }
 
 
-void arm::drawHoriz(int angle){
+void arm::drawHoriz(float angle){
     // Angle should be relative to middle position i.e. from centre of horizontal line to robot rotate 90 degrees left should be -90
     const int vert = -27;
-    int horiz = -37*cos(angle);
+    int horiz = -37*cos(angle*(180/PI));
     setArmPosition(horiz, vert);
 
 }

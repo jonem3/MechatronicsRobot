@@ -21,8 +21,11 @@ private:
 public:
     void setup();
     void setEncoders(int countL, int countR);
-    void moveToAngle(int leftMotAng, int rightMotAng);
+    void moveToAngle(double leftMotAng, double rightMotAng);
     void setMotorSpeed(float left, float right);
     void rotateAngle(float degrees);
     float getDistanceTravelled();
+    void resetEncoders();
+    double getAvgEnc();
+    void turnOnTheBreaks();
 };

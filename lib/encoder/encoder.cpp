@@ -8,11 +8,11 @@ void encoder::setEncoders(int count){
     wheel_angle = enc_angle*GEAR_RATIO;
 }
 
-float encoder::readAngle(){
+double encoder::readAngle(){
     return wheel_angle;
 }
 
-float encoder::readSpeed(){
+double encoder::readSpeed(){
     return 0;
 }
 
@@ -20,8 +20,8 @@ double encoder::getSpeed()
 {
 
     currentTime = millis();
-    float currentAngle = wheel_angle;
-    float angleDifference = currentAngle - lastAngle;
+    double currentAngle = wheel_angle;
+    double angleDifference = currentAngle - lastAngle;
     int timeDifference = currentTime - lastTime;
 
     
@@ -35,4 +35,9 @@ double encoder::getSpeed()
     lastTime = currentTime;
     lastAngle = currentAngle;
     return speed_robot;
+}
+
+void encoder::resetEncCount(){
+    enc_count = 0;
+    setEncoders(0);
 }

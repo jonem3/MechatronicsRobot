@@ -12,6 +12,9 @@ void setup();
     ServoMotor(int servoPin, int pulse, float max, float min, int initialPos);
     void moveTo(float setAngle);
     float getAngle();
+    void attach();
+    void detach();
+    void setAngle(float Angle);
 };
 
 /*

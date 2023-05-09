@@ -12,21 +12,32 @@ void motion::setup()
     rightMot.setup();
 }
 
-void motion::moveToAngle(int leftMotAngle, int rightMotAngle)
+void motion::moveToAngle(double leftMotAngle, double rightMotAngle)
 {
-    float leftAngle, rightAngle;
+    double leftAngle, rightAngle;
     int startTime = millis();
     int elapsedTime = 0;
+    int counter = 0;
     do
     {
+        counter++;
         leftAngle = leftEnc.readAngle();
         rightAngle = rightEnc.readAngle();
-        float errorL = leftMotAngle - leftAngle;
-        float errorR = rightMotAngle - rightAngle;
+        double errorL = leftMotAngle - leftAngle;
+        double errorR = rightMotAngle - rightAngle;
         leftMot.moveMotor(errorL * AngleKp);
         rightMot.moveMotor(errorR * AngleKp);
-        elapsedTime = (millis() - startTime) / 1000;
-    } while (leftAngle != leftMotAngle && rightAngle != rightMotAngle && elapsedTime <= 5);
+         elapsedTime = (millis() - startTime);
+        
+    } while (leftAngle != leftMotAngle && rightAngle != rightMotAngle && elapsedTime <= 2000);
+    leftMot.moveMotor(0);
+    rightMot.moveMotor(0);
+}
+
+double motion::getAvgEnc()
+{
+    double avgEnc = (-leftEnc.readAngle() + rightEnc.readAngle()) / 2;
+    return avgEnc;
 }
 
 float motion::speedController(float currentSpeed, float targetSpeed, int motor)
@@ -79,8 +90,8 @@ void motion::rotateAngle(float degrees)
     float toTravel = robotCir * rotationPercentage;     // How far a wheel needs to travel to acheive this
     float numRotations = toTravel / wheelCircumference; // Number of rotations of a wheel needed
     float rotationDegrees = numRotations * 360;         // Conversion to degrees
-    float leftAngle = leftEnc.readAngle();
-    float rightAngle = rightEnc.readAngle();
+    double leftAngle = leftEnc.readAngle();
+    double rightAngle = rightEnc.readAngle();
     moveToAngle(leftAngle + rotationDegrees, rightAngle - rotationDegrees);
 }
 
@@ -92,4 +103,15 @@ float motion::getDistanceTravelled()
     float avgEnc = (currentLEnc + currentREnc) / 2;
     float numRotations = avgEnc / 360;
     return (numRotations * wheelCircumference);
+}
+
+void motion::resetEncoders()
+{
+    leftEnc.resetEncCount();
+    rightEnc.resetEncCount();
+}
+
+void motion::turnOnTheBreaks(){
+    leftMot.brake();
+    rightMot.brake();
 }
