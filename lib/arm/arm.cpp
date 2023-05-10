@@ -81,7 +81,7 @@ void arm::drawLine(){
     }while(i <= bottom);
 
     do{
-        setArmPosition(-42, i);
+        setArmPosition(-50, i);
         i--;
     }
     while(i >= horizontalHeight);
