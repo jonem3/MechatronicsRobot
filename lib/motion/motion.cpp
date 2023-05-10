@@ -18,6 +18,9 @@ void motion::moveToAngle(double leftMotAngle, double rightMotAngle)
     int startTime = millis();
     int elapsedTime = 0;
     int counter = 0;
+    double leftError;
+    double rightError;
+    double meanError = 100;
     do
     {
         counter++;
@@ -28,8 +31,15 @@ void motion::moveToAngle(double leftMotAngle, double rightMotAngle)
         leftMot.moveMotor(errorL * AngleKp);
         rightMot.moveMotor(errorR * AngleKp);
          elapsedTime = (millis() - startTime);
+          leftError = ((errorL)/leftMotAngle)*100;
+         rightError = ((errorR)/rightMotAngle)*100;
+         meanError = (leftError+rightError)/2;
         
-    } while (leftAngle != leftMotAngle && rightAngle != rightMotAngle && elapsedTime <= 2000);
+    } while (leftAngle != leftMotAngle && rightAngle != rightMotAngle && elapsedTime < 2000);
+    
+    Serial.print("Rotation Error (%): ");
+    Serial.println(meanError);
+
     leftMot.moveMotor(0);
     rightMot.moveMotor(0);
 }

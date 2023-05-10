@@ -7,8 +7,8 @@ private:
     motor rightMot = motor(14, 15, 4, 9, 0);
     encoder leftEnc;
     encoder rightEnc;
-    const float AngleKp = 5;
-    const float Kp = 60 ;
+    const float AngleKp = 6;
+    const float Kp = 70 ;
     const float Ki = 40;
     const float robotCir = 250*PI;
     const float wheelCircumference = 68*PI;

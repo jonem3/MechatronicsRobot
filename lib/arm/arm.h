@@ -4,11 +4,15 @@
 class arm
 {
     private:
-        float L0 = 11;
-        float L1 = 102;
-        float L2 = 79;
-        float L3 = 144; //Updated
+        const float L0 = 11;
+        const float L1 = 102;
+        const float L2 = 79;
+        const float L3 = 144; //Updated
+        const int top = -90;
+        const int bottom = -27;
+        const int horizontalHeight = (top+bottom)/2;
         float S2, S3;
+        
         ServoMotor Shoulder = ServoMotor(7, 1478, 1.571, -1.571, 1.571);
         ServoMotor Elbow = ServoMotor(8, 1484, 1.571, -1.571, 0);
 

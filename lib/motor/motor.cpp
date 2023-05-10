@@ -66,7 +66,7 @@ void motor::motorStandBy()
    pwmValue = 0;
    digitalWrite(pinI1, I1);
    digitalWrite(pinI2, I2);
-   digitalWrite(pinPWM, pwmValue);
+   analogWrite(pinPWM, pwmValue);
    digitalWrite(pinStandBy, standBy);
 }
 
@@ -78,6 +78,6 @@ void motor::brake()
    pwmValue = 0;
    digitalWrite(pinI1, I1);
    digitalWrite(pinI2, I2);
-   digitalWrite(pinPWM, pwmValue);
+   analogWrite(pinPWM, pwmValue);
    digitalWrite(pinStandBy, standBy);
 }

@@ -38,23 +38,32 @@ void setup()
 
 void drawHorizontalLine()
 {
-  int startAngle = -12;
+  int startAngle = -10;
   int currentAngle = startAngle;
+  int motionThing = 2;
   roboticArm->detachArm();
 
   robotMotion.rotateAngle(currentAngle);
-  for (int i = 0; i < (abs(startAngle) * 2); i++)
+  for (int i = 0; i < (abs(startAngle) * 2); i+=motionThing)
   {
-    currentAngle++;
-
+    Serial.print("Angle: ");
+    Serial.println(currentAngle);
+    robotMotion.turnOnTheBreaks();
     roboticArm->attachArm();
     roboticArm->drawHoriz(currentAngle);
     delay(100);
     roboticArm->detachArm();
-    robotMotion.rotateAngle(i);
+    currentAngle+=3;
+    robotMotion.rotateAngle(motionThing);
+    
   }
+  roboticArm->attachArm();
+  roboticArm->goHome();
+  delay(100);
+  roboticArm->detachArm();
   robotMotion.rotateAngle(startAngle);
   roboticArm->attachArm();
+  
 }
 
 void followLine()
@@ -70,12 +79,6 @@ void followLine()
 
 void loop()
 {
-  // put your main code here, to run repeatedly: How about no
-  Serial.print(left.FindDistance());
-  Serial.print(" ");
-  Serial.println(right.FindDistance());
-  delay(100);
-  // Serial.println(right.FindDistance());
   robotMotion.setMotorSpeed(0, 0); // Robot goes nowhere
 }
 
@@ -99,18 +102,13 @@ void crossTheVoid()
   {
     robotMotion.setMotorSpeed(0.2, 0.2);   // Vroom vroom, is a PI loop so needs to keep being called
   } while (!lineDetection.lineDetected()); // Keep zooming until the line is detected
-  robotMotion.setMotorSpeed(0, 0);
-  delay(500);
-  robotMotion.setMotorSpeed(0.1, 0.1);
+
   float currentDistanceElapsed = 0;                         // reset travelled distance
   float startDistance = robotMotion.getDistanceTravelled(); // reset distance start point.
   do
   {
     currentDistanceElapsed = robotMotion.getDistanceTravelled() - startDistance; // Find out how far along the line has been traversed
   } while (currentDistanceElapsed < (250 / 2));                                  // Should only go 80cm
-
-  robotMotion.setMotorSpeed(0, 0);
-  delay(500);
 
   robotMotion.setMotorSpeed(0, 0); // Stop
   robotMotion.rotateAngle(-90);    // Spin again
@@ -146,7 +144,7 @@ void Task3bGetToBoard()
     *leftDistance = left.FindDistance();
     *rightDistance = right.FindDistance();
     *meanDistance = (*leftDistance + *rightDistance) / 2;
-  } while (*meanDistance > 8.7); // We need to get an accurate value for this
+  } while (*meanDistance > 8.75); // We need to get an accurate value for this
   delete (leftDistance);
   delete (rightDistance);
   delete (meanDistance);

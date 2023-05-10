@@ -5,14 +5,15 @@ void arm::setArmPosition(int x, int y)
     getAngles(x, y);
     bool isPossible = checkAngles(x, y);
     if(isPossible){
+        Elbow.setAngle(S3);
+        Shoulder.setAngle(-S2);
+    }
+    else{
+        Serial.print("Angle Not Possible: ");
         Serial.print("X: ");
         Serial.print(x - L2 - L3);
         Serial.print(" | Y: ");
         Serial.println(y);
-        Serial.println();
-        
-        Elbow.setAngle(S3);
-        Shoulder.setAngle(-S2);
     }
     
     
@@ -52,16 +53,11 @@ bool arm::checkAngles(int oldX, int oldY){
         return true;
     }
     else{
-        Serial.print("MISMATCH: ");
-        Serial.print("Expected X: ");
-        Serial.print(oldX);
-        Serial.print(" Expected Y: ");
-        Serial.print(oldY);
-        Serial.print(" | X: ");
-        Serial.print(x);
-        Serial.print(" Y: ");
+        Serial.print("POSITION ACHIEVED: ");
+        Serial.print("X: ");
+        Serial.print(x - L2 - L3);
+        Serial.print(" | Y: ");
         Serial.println(y);
-        Serial.println();
         return false;
     }
 }
@@ -75,30 +71,27 @@ void arm::getAngles(int x, int y)
 }
 
 void arm::drawLine(){
-    const int top = -90;
-    const int bottom = 36;
     delay(1000);
     setArmPosition(-45, top);
     delay(1000);
     int i = top;
     do{
-        setArmPosition(-37, i);
+        setArmPosition(-35, i);
         i++;
     }while(i <= bottom);
 
     do{
-        setArmPosition(-50, i);
+        setArmPosition(-45, i);
         i--;
     }
-    while(i >= (top+bottom)/2);
+    while(i >= horizontalHeight);
 }
 
 
 void arm::drawHoriz(float angle){
     // Angle should be relative to middle position i.e. from centre of horizontal line to robot rotate 90 degrees left should be -90
-    const int vert = -27;
-    int horiz = -37*cos(angle*(180/PI));
-    setArmPosition(horiz, vert);
+    int horiz = -36*cos(angle*(PI/180));
+    setArmPosition(horiz, horizontalHeight);
 
 }
 
